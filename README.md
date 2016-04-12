@@ -17,3 +17,5 @@ nice to have
 - temporary power overrule
 - temporary lighting overrule
 - 
+
+Source to steal stuff from : http://www.plantedtank.net/forums/20-diy/314009-arduino-auto-dosser.html
