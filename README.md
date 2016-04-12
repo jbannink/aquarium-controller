@@ -10,3 +10,10 @@ ToDo
 - switching Heater/pumps/other stuff
 - display settings on tft screen
 - adjusting values through tft/app
+
+nice to have
+- Feeder
+- Night scheme
+- temporary power overrule
+- temporary lighting overrule
+- 
