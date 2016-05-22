@@ -57,7 +57,8 @@ pinMode ( BACKLIGHT_PIN, OUTPUT );
   Serial.begin(57600);
   Wire.begin();
   RTC.begin();
-  //als de klok niet klopt, zet rtc.adjust dan buiten het if statement, upload, en zet rt.adjust terug in het if statement en upload. Op deze manier wodt de tijd gezert met de compileer tijd
+  //als de klok niet klopt, zet rtc.adjust dan buiten het if statement, upload, en zet rt.adjust terug in het if statement en upload.
+  //Op deze manier wordt de tijd gezet met de tijd dat het programma gecompileerd werd
   if (! RTC.isrunning()) {
     Serial.println("RTC is NOT running!");
     // following line sets the RTC to the date & time this sketch was compiled
