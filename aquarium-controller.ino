@@ -16,17 +16,17 @@ RTC_DS1307 RTC;
 byte waarde;
 
 int address = 0;
-int c1_aanuur = 22;
-int c1_aanminuut = 43;
-int c1_uituur = 23;
-int c1_uitminuut = 15;
+int c1_aanuur = 19;
+int c1_aanminuut =15;
+int c1_uituur = 19;
+int c1_uitminuut = 10;
 int c2_aanuur = 3;
 int c2_uituur = 4;
 byte button1_state = LOW;
 int button1_pin = 2;
-const int c1_redPin = 22;
-const int c1_greenPin = 23;
-const int c1_bluePin = 24;
+const int c1_redPin = 44;
+const int c1_greenPin = 45;
+const int c1_bluePin = 46;
 int uurnu;
 int minuutnu;
 int secnu;
@@ -35,15 +35,16 @@ int secnu;
 //SETUP
 void setup()
 {
-  pinMode(c1_redPin,OUTPUT);
-  pinMode(c1_greenPin,OUTPUT);
-  pinMode(c1_bluePin,OUTPUT);
+// pinMode(c1_redPin,OUTPUT);
+// pinMode(c1_greenPin,OUTPUT);
+// pinMode(c1_bluePin,OUTPUT);
   //waarde van de eeprom uitlezen
   waarde = EEPROM.read(address); 
   //rtc setup
   Serial.begin(57600);
   Wire.begin();
   RTC.begin();
+  //RTC.adjust(DateTime(__DATE__, __TIME__));
     //als de klok niet klopt, zet rtc.adjust dan buiten het if statement, upload, en zet rt.adjust terug in het if statement en upload.
   //Op deze manier wordt de tijd gezet met de tijd dat het programma gecompileerd werd
   if (! RTC.isrunning()) {
@@ -101,25 +102,30 @@ if ((uurnu == c1_aanuur) && (minuutnu == c1_aanminuut) && (secnu <=2))
   sunup();
   }
 if ((uurnu == c1_uituur) && (minuutnu == c1_uitminuut) && (secnu <= 2)) 
-  {
-  sundown();
-  }
+   {
+    sundown();
+   }
 }
 
 void sunup() {
   for(int fadeValue=0; fadeValue<=254; fadeValue++) {
-  analogWrite(c1_greenPin, fadeValue);
-  analogWrite(c1_redPin, fadeValue);
-  analogWrite(c1_bluePin, fadeValue);
+    Serial.print("sunup");
+  digitalWrite(c1_greenPin, fadeValue);
+  digitalWrite(c1_redPin, fadeValue);
+  digitalWrite(c1_bluePin, fadeValue);
   delay(50);
   }
 }
 void sundown() {
-  for(int fadeValue=254; fadeValue>=0; fadeValue--) {
-  analogWrite(c1_greenPin, fadeValue);
-  analogWrite(c1_redPin, fadeValue);
-  analogWrite(c1_bluePin, fadeValue);
-  delay(50);
-  }
+   Serial.print("sundown");
+   delay (3000);
+   for(int fadeValue=0; fadeValue<=254; fadeValue++) {
+    Serial.print("sundown");
+    digitalWrite(c1_greenPin, 254-fadeValue);
+    digitalWrite(c1_redPin, 254-fadeValue);
+    digitalWrite(c1_bluePin, 254-fadeValue);
+    delay(50);
+    }
 }
+
 
