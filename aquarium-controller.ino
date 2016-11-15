@@ -337,7 +337,13 @@ void ChangeTime(int aanuur,int aanmin,int uituur,int uitmin) {
            teller=teller+1;
            Serial.println(teller);
          }
+         Serial.println("Einde 3");
       }
+      Serial.println("Einde if p.z");
+      tft.fillScreen(GREEN);
   }
+  Serial.println("Einde While");
   teller=0;
+  tft.fillScreen(BLACK);
+  loop;
 }
